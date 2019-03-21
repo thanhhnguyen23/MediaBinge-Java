@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Build started on `date`
+      - mvn install:install-file -Dfile=./src/main/resources/ojdbc7-12.1.0.2.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0.2 -Dpackaging=jar
+      - mvn test
+  build:
+    commands:
+      - echo Build completed on `date`
+      - mvn clean package
+      - mv target/my-project-0.0.1-SNAPSHOT.war my-project-0.0.1-SNAPSHOT.war
+artifacts:
+  files:
+    - my-project-0.0.1-SNAPSHOT.war
+    - .ebextensions/**/*
