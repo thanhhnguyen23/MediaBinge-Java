@@ -10,8 +10,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn clean package
-      - mv target/my-project-0.0.1-SNAPSHOT.war my-project-0.0.1-SNAPSHOT.war
+      - mv target/my-project-1.0-SNAPSHOT.war my-project-1.0-SNAPSHOT.war
 artifacts:
   files:
-    - my-project-0.0.1-SNAPSHOT.war
-    - .ebextensions/**/*
+    - my-project-1.0-SNAPSHOT.war
