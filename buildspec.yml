@@ -10,8 +10,8 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn clean package
-      - mv target/my-project-0.0.1-SNAPSHOT.war my-project-0.0.1-SNAPSHOT.war
+      - mv target/revature_book_store_v4-0.0.1-SNAPSHOT.war revature_book_store_v4-0.0.1-SNAPSHOT.war
 artifacts:
   files:
-    - my-project-0.0.1-SNAPSHOT.war
+    - revature_book_store_v4-0.0.1-SNAPSHOT.war
     - .ebextensions/**/*

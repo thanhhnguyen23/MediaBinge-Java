@@ -1,2 +1,2 @@
-# git-setup-Java
-Setting up a repo for a Java project via maven
+# rbs_v4-backend
+Backend Java application used to support the RBS NG UI
