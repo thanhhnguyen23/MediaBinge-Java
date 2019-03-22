@@ -15,8 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import oracle.jdbc.proxy.annotation.Post;
-
+//TODO - do not forget to do roles
 @NamedQueries({
 	@NamedQuery(name = "getAllUsersHQL", query = "from User u"),
 	@NamedQuery(name = "findUserByIdHQL", query = "from User u where u.id = :user_id"),
@@ -52,8 +51,8 @@ public class User {
 	private Profile profile;
 
 	
-//	@OneToMany(mappedBy="MB_users", cascade=CascadeType.ALL)
-//	private List<Post> posts;
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	private List<Post> posts;
 
 
 	public User() {
