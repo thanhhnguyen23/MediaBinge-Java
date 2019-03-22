@@ -3,31 +3,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.revature</groupId>
-<<<<<<< HEAD
+<!-- make sure this artiffactId is also reflects on the buildspec file -->
 	<artifactId>my-project</artifactId>
-	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>my-project</name>
-=======
-
-    <!-- make sure this artiffactId is also reflects on the buildspec file -->
-	<artifactId>MediaBinge</artifactId>
-
-	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
-
-    <!-- make sure this artiffactId is also reflects on the buildspec file -->
+	<packaging>war</packaging>	    
 	<name>MediaBinge</name>
->>>>>>> Dao3-21
-	<url>http://maven.apache.org</url>
+
+<!--	<url>http://maven.apache.org</url>-->
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>5.0.7.RELEASE</spring.version>
         <jackson.core.version>2.9.6</jackson.core.version>
 	</properties>
+	
 	<dependencies>
-<<<<<<< HEAD
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -39,7 +30,8 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.2.0.Final</version>
-=======
+		</dependency>
+		
 		 <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -73,7 +65,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
+            <version>5.0.7.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -105,7 +97,6 @@
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
->>>>>>> Dao3-21
 		</dependency>
 
 		<dependency>
