@@ -1,12 +1,14 @@
 package com.revature.models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,6 +34,10 @@ public class Post {
 
 	@Column(name="date_posted")
 	private Timestamp datePosted;
+	
+	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
+	private List<Response> responses;
+
 
 	public int getPostId() {
 		return postId;
