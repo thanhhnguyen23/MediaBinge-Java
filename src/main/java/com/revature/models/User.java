@@ -48,10 +48,8 @@ public class User {
 	private String password;
 	
 
-	//TODO -- come back here
-	// commented out so we do not get errors until we're done with DAOs
-//	@OneToOne(mappedBy="MB_users", cascade=CascadeType.ALL)
-//	private Profile profile;
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	private Profile profile;
 
 	
 //	@OneToMany(mappedBy="MB_users", cascade=CascadeType.ALL)
