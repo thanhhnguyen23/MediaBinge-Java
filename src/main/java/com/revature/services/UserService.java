@@ -3,18 +3,20 @@ package com.revature.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.User;
 import com.revature.repos.UserRepo;
 
+@Component
 public class UserService {
 	
 	private UserRepo uRepo;
 	
 	@Autowired
-	public UserService(UserRepo repo) {
-		this.uRepo = repo;
+	public UserService(UserRepo userRepo) {
+		this.uRepo = userRepo;
 	}
 	
 	@Transactional(readOnly = true)
