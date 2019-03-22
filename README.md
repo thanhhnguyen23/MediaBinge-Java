@@ -10,3 +10,9 @@ This is the application tier for the app Media Binge a service allows you to dis
  - **Jaitee Pitts**(https://github.com/jaiteep)
  - **Abe Schroeder**(https://github.com/AbeSchroeder)
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> Dao3-21
