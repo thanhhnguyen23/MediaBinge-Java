@@ -5,10 +5,10 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.revature.models.Post;
 import com.revature.models.Profile;
-
+@Component
 public class ProfileRepo implements BasicRepo<Profile>{
 	
 	private SessionFactory factory;
