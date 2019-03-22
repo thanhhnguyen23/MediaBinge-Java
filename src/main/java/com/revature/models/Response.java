@@ -25,11 +25,17 @@ public class Response {
 	@Column(name="text")
 	private String text;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade={
+			CascadeType.PERSIST, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.REFRESH
+	})
 	@JoinColumn(name="post_id")
 	private Post post;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade={
+		CascadeType.PERSIST, CascadeType.DETACH,
+		CascadeType.MERGE, CascadeType.REFRESH
+	})
 	@JoinColumn(name="user_id")
 	private User user;
 
