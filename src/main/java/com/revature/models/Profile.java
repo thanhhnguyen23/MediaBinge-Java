@@ -1,9 +1,5 @@
 package com.revature.models;
 
-<<<<<<< HEAD
-public class Profile {
-
-=======
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -128,5 +124,5 @@ public class Profile {
 		return "Profile [profileId=" + profileId + ", favoriteMovies=" + favoriteMovies + ", favoriteBooks="
 				+ favoriteBooks + ", favoriteTvShows=" + favoriteTvShows + "]";
 	}
->>>>>>> Dao3-21
+
 }

@@ -8,30 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-<<<<<<< HEAD
-=======
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
->>>>>>> Dao3-21
+
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-<<<<<<< HEAD
+
 import oracle.jdbc.proxy.annotation.Post;
 
-=======
+
 //TODO - do not forget to do roles
-@NamedQueries({
-	@NamedQuery(name = "getAllUsersHQL", query = "from User u"),
-	@NamedQuery(name = "findUserByIdHQL", query = "from User u where u.id = :user_id"),
-	@NamedQuery(name = "findUserByFirstNameHQL", query = "from User u where u.firstName like :first_name"),
-	@NamedQuery(name = "findUserByLastNameHQL", query = "from User u where u.LastName like :last_name"),
-	@NamedQuery(name = "findUserByUserNameHQL", query = "from User u where u.username like :username")
-	
-})
->>>>>>> Dao3-21
+
 @Entity
 @Table(name="MB_users")
 @SequenceGenerator(name="user_seq", sequenceName="mb_user_pk_seq", allocationSize=1)
@@ -55,17 +43,10 @@ public class User {
 	private String password;
 	
 
-<<<<<<< HEAD
 	//TODO -- come back here
 	// commented out so we do not get errors until we're done with DAOs
-//	@OneToOne(mappedBy="MB_users", cascade=CascadeType.ALL)
-//	private Profile profile;
 
-	
-//	@OneToMany(mappedBy="MB_users", cascade=CascadeType.ALL)
-//	private List<Post> posts;
 
-=======
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 	private Profile profile;
 
@@ -75,7 +56,7 @@ public class User {
 
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private List<Response> responses;
->>>>>>> Dao3-21
+
 
 	public User() {
 		super();
