@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,15 +30,10 @@ public class Post {
 			CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
-	
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@ManyToOne(cascade={
-			CascadeType.PERSIST, CascadeType.DETACH,
-			CascadeType.MERGE, CascadeType.REFRESH
-	})
-	
+	@ManyToOne
 	@JoinColumn(name="topic_id")
 	private Topic topic;
 
@@ -50,7 +45,29 @@ public class Post {
 	
 	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
 	private List<Response> responses;
+	
 
+	public Post(int postId, User user, Topic topic, String text, Timestamp datePosted, List<Response> responses) {
+		super();
+		this.postId = postId;
+		this.user = user;
+		this.topic = topic;
+		this.text = text;
+		this.datePosted = datePosted;
+		this.responses = responses;
+	}
+
+	public Post(User user, Topic topic, String text, Timestamp datePosted) {
+		super();
+		this.user = user;
+		this.topic = topic;
+		this.text = text;
+		this.datePosted = datePosted;
+	}
+
+	public Post() {
+		super();
+	}
 
 	public int getPostId() {
 		return postId;
@@ -90,6 +107,14 @@ public class Post {
 
 	public void setDatePosted(Timestamp datePosted) {
 		this.datePosted = datePosted;
+	}
+	
+	public List<Response> getResponses() {
+		return responses;
+	}
+
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
 	}
 
 	@Override
