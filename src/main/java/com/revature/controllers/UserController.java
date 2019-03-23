@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +36,8 @@ public class UserController {
 		return service.getAll();
 	}
 	
-	@GetMapping(value="/{id)", produces=MediaType.APPLICATION_JSON_VALUE)
+//	@GetMapping(value="/{id)", produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public User getUserById(@PathVariable int id) {
 		User user = service.getById(id);
 		return user;
@@ -47,12 +49,14 @@ public class UserController {
 		return service.add(newUser);
 	}
 	
+	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces="application/json")
 	public User updateUser(@RequestBody User updateUser) {
 		User user = service.update(updateUser);
 		return user;
 	}
 	
+	//TODO Throws an exception, possibly because user has no posts
 	@DeleteMapping(value="/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteCard(@PathVariable int id) {

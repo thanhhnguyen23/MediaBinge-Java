@@ -33,10 +33,7 @@ public class Post {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@ManyToOne(cascade={
-			CascadeType.PERSIST, CascadeType.DETACH,
-			CascadeType.MERGE, CascadeType.REFRESH
-	})
+	@ManyToOne
 	@JoinColumn(name="topic_id")
 	private Topic topic;
 
