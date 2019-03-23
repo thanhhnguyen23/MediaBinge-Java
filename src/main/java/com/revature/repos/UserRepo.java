@@ -42,8 +42,14 @@ public class UserRepo implements BasicRepo <User>{
 		Session session = factory.getCurrentSession();
 		User user = session.get(User.class, updatedUser.getId());
 		if(user == null) return null;
-		else user = updatedUser;
-		return updatedUser;
+		else {
+			user.setUsername(updatedUser.getUsername());
+			user.setFirstName(updatedUser.getFirstName());
+			user.setLastName(updatedUser.getLastName());
+			user.setPassword(updatedUser.getPassword());
+		}
+		session.save(user);
+		return user;
 	}
 
 	@Override

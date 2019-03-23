@@ -31,12 +31,20 @@ public class UserService {
 	
 	@Transactional
 	public User add(User newUser) {
-		return uRepo.add(newUser);
+		if(newUser != null) {
+			return uRepo.add(newUser);
+		}
+		return null;
+		//TODO throw custom exception
 	}
 	
 	@Transactional
 	public User update(User updatedUser) {
-		return uRepo.update(updatedUser);
+		if(updatedUser != null){
+			return uRepo.update(updatedUser);
+		}
+		return null;
+		//TODO throw custom exception
 	}
 	
 	@Transactional

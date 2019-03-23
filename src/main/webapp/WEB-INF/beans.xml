@@ -55,5 +55,8 @@
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
 
+   <tx:annotation-driven />
+
+  
 
 </beans>
