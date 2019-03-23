@@ -15,6 +15,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
+<<<<<<< HEAD
+=======
+// oracle has been replaced with mysql
+//import oracle.jdbc.proxy.annotation.Post;
+>>>>>>> 28c2d475bd315acb48c6a23f48436a359635f9f2
 
 
 //TODO - do not forget to do roles
