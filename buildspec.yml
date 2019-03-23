@@ -10,7 +10,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn clean package
-      - mv target/MediaBinge-1.0-SNAPSHOT.war MediaBinge-1.0-SNAPSHOT.war
+      - mv target/MediaBinge-0.0.1-SNAPSHOT.war MediaBinge-0.0.1-SNAPSHOT.war
 artifacts:
   files:
-    - MediaBinge-1.0-SNAPSHOT.war
+    - MediaBinge-0.0.1-SNAPSHOT.war
