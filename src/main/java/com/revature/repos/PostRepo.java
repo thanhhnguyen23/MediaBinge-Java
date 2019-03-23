@@ -5,9 +5,11 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.models.Post;
 
+@Component
 public class PostRepo implements BasicRepo<Post>{
 	private SessionFactory factory;
 
