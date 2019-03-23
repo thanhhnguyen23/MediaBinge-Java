@@ -1,56 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:context="http://www.springframework.org/schema/context"
-   xmlns:mvc="http://www.springframework.org/schema/mvc"
-   xmlns:tx="http://www.springframework.org/schema/tx"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
                        http://www.springframework.org/schema/beans/spring-beans.xsd
                        http://www.springframework.org/schema/context
                        http://www.springframework.org/schema/context/spring-context.xsd
                        http://www.springframework.org/schema/mvc
                        http://www.springframework.org/schema/mvc/spring-mvc.xsd
                        http://www.springframework.org/schema/tx
-                       http://www.springframework.org/schema/tx/spring-tx.xsd" >
+                       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-   <context:component-scan base-package="com.revature" />
+	<context:component-scan
+		base-package="com.revature" />
 
-   <mvc:annotation-driven />
+	<mvc:annotation-driven />
 
-   <!-- Datasource bean -->
-   <bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-       <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	<!-- Datasource bean -->
+	<bean id="myDataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<!-- migrating to mysql from oracle <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/> -->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
-       <!-- migrating to mysql from oracle -->
-       <!-- 
-       		<property name="url" value="jdbc:oracle:thin:@java-spark.c88cfh7d8myl.us-east-2.rds.amazonaws.com:1521:ORCL"></property>
-       -->
-       <property name="url" value="jdbc:oracle:thin:@java-spark.c88cfh7d8myl.us-east-2.rds.amazonaws.com:1521:ORCL"></property>
+		<!-- migrating to mysql from oracle <property name="url" value="jdbc:oracle:thin:@java-spark.c88cfh7d8myl.us-east-2.rds.amazonaws.com:1521:ORCL"></property> -->
+		<property name="url"
+			value="jdbc:mysql://mysql-java-spark-190107.c2hzjmytkev4.us-east-1.rds.amazonaws.com:3306/mediabinge"></property>
 
-       <property name="username" value="admin"/>
-       <property name="password" value="JavaSparkDB"/>
-   </bean>
+		<property name="username" value="admin" />
+		<property name="password" value="p4ssword" />
+	</bean>
 
-   <bean id="mySessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-       <property name="dataSource" ref="myDataSource"/>
-       <property name="packagesToScan" value="com.revature"/>
-       <property name="hibernateProperties">
-           <props>
-           	   <!-- changed dialect from oracle to mysql -->
-               <!-- <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
-               <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-               <prop key="hibernate.show_sql">true</prop>
-               <prop key="hibernate.format_sql">true</prop>
-               <prop key="hibernate.hbm2ddl.auto">create</prop>
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="packagesToScan" value="com.revature" />
+		<property name="hibernateProperties">
+			<props>
+				<!-- changed dialect from oracle to mysql -->
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 
-           </props>
+			</props>
 
-       </property>
-   </bean>
+		</property>
+	</bean>
 
-   <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-       <property name="sessionFactory" ref="mySessionFactory"></property>
-   </bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory"></property>
+	</bean>
 
 
 </beans>
