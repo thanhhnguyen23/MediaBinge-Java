@@ -16,6 +16,7 @@
    <context:component-scan base-package="com.revature" />
 
    <mvc:annotation-driven />
+   <tx:annotation-driven />
 
    <!-- Datasource bean -->
    <bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -43,5 +44,7 @@
    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
        <property name="sessionFactory" ref="mySessionFactory"></property>
    </bean>
+   
+   
 
 </beans>
