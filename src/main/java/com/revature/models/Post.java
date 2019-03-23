@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,7 +30,6 @@ public class Post {
 			CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
-	
 	@JoinColumn(name="user_id")
 	private User user;
 	
@@ -38,7 +37,6 @@ public class Post {
 			CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
-	
 	@JoinColumn(name="topic_id")
 	private Topic topic;
 
