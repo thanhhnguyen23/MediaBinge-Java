@@ -48,7 +48,29 @@ public class Post {
 	
 	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
 	private List<Response> responses;
+	
 
+	public Post(int postId, User user, Topic topic, String text, Timestamp datePosted, List<Response> responses) {
+		super();
+		this.postId = postId;
+		this.user = user;
+		this.topic = topic;
+		this.text = text;
+		this.datePosted = datePosted;
+		this.responses = responses;
+	}
+
+	public Post(User user, Topic topic, String text, Timestamp datePosted) {
+		super();
+		this.user = user;
+		this.topic = topic;
+		this.text = text;
+		this.datePosted = datePosted;
+	}
+
+	public Post() {
+		super();
+	}
 
 	public int getPostId() {
 		return postId;
@@ -88,6 +110,14 @@ public class Post {
 
 	public void setDatePosted(Timestamp datePosted) {
 		this.datePosted = datePosted;
+	}
+	
+	public List<Response> getResponses() {
+		return responses;
+	}
+
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
 	}
 
 	@Override
