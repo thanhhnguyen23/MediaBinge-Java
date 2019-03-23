@@ -15,7 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
-import oracle.jdbc.proxy.annotation.Post;
+// oracle has been replaced with mysql
+//import oracle.jdbc.proxy.annotation.Post;
 
 
 //TODO - do not forget to do roles
