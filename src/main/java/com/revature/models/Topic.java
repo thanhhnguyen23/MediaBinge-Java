@@ -1,21 +1,25 @@
 package com.revature.models;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="MB_topics")
 public class Topic {
 	@Column(name="topic_id")
+	@Id
 	private int id;
 	
-	private String topic;
+	private String topicName;
 
-	@OneToOne(mappedBy="topic", cascade=CascadeType.ALL)
-	private Post post;
+	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL)
+	private List<Post> posts;
 
 	public int getId() {
 		return id;
@@ -26,28 +30,30 @@ public class Topic {
 	}
 
 	public String getTopic() {
-		return topic;
+		return topicName;
 	}
 
 	public void setTopic(String topic) {
-		this.topic = topic;
+		this.topicName = topic;
 	}
 
-	public Post getPost() {
-		return post;
+	public List<Post> getPost() {
+		return posts;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setPost(List<Post> post) {
+		this.posts = post;
 	}
+	
+	//TODO Add a helper method to add 1 post to the topic rather than a list of posts 
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((post == null) ? 0 : post.hashCode());
-		result = prime * result + ((topic == null) ? 0 : topic.hashCode());
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
+		result = prime * result + ((topicName == null) ? 0 : topicName.hashCode());
 		return result;
 	}
 
@@ -62,22 +68,22 @@ public class Topic {
 		Topic other = (Topic) obj;
 		if (id != other.id)
 			return false;
-		if (post == null) {
-			if (other.post != null)
+		if (posts == null) {
+			if (other.posts != null)
 				return false;
-		} else if (!post.equals(other.post))
+		} else if (!posts.equals(other.posts))
 			return false;
-		if (topic == null) {
-			if (other.topic != null)
+		if (topicName == null) {
+			if (other.topicName != null)
 				return false;
-		} else if (!topic.equals(other.topic))
+		} else if (!topicName.equals(other.topicName))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Topic [id=" + id + ", topic=" + topic + ", post=" + post + "]";
+		return "Topic [id=" + id + ", topic=" + topicName + ", post=" + posts + "]";
 	}
 	
 }
