@@ -97,3 +97,6 @@ hibernate.cfg.xml
 
 # target folder
 target/
+
+#vs code
+.vscode
