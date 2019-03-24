@@ -40,7 +40,7 @@ public class Post {
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="topic_id")
-	@JsonIgnore //
+//	@JsonIgnore 
 	private Topic topic;
 
 	@Column(name="post_text")

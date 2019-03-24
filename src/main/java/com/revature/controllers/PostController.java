@@ -50,9 +50,9 @@ public class PostController {
 //	}
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PostMapping(value="/user={userId}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public Post addPost(@RequestBody Post newPost, @PathVariable int userId) {
-		return service.add(newPost, userId);
+	@PostMapping(value="/topic={topicId}/user={userId}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public Post addPost(@RequestBody Post newPost, @PathVariable int userId, @PathVariable int topicId) {
+		return service.add(newPost, userId, topicId);
 	}
 	
 	//UPDATE

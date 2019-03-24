@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.models.Post;
+import com.revature.models.Topic;
 import com.revature.models.User;
 
 @Component
@@ -31,7 +32,8 @@ public class PostRepo implements BasicRepo<Post>{
 		return session.get(Post.class, id);
 	}
 
-	@Override
+	@Override 
+	/***doesn't work??**/
 	public Post add(Post newPost) {
 		Session session = factory.getCurrentSession();
 		User user = session.get(User.class, newPost.getUser().getId());
@@ -40,10 +42,12 @@ public class PostRepo implements BasicRepo<Post>{
 		return newPost;
 	}
 	
-	public Post add(Post newPost, int userId) {
+	public Post add(Post newPost, int userId, int topicId) {
 		Session session = factory.getCurrentSession();
 		User user = session.get(User.class, userId);
 		newPost.setUser(user);
+		Topic topic = session.get(Topic.class, topicId);
+		newPost.setTopic(topic);
 		session.save(newPost);
 		return newPost;
 	}
