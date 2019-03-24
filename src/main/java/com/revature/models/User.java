@@ -40,6 +40,9 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	@Column(name = "role_id")
+	private int roleId;
+	
 
 	//TODO -- come back here
 	// commented out so we do not get errors until we're done with DAOs
@@ -79,6 +82,42 @@ public class User {
 		this.password = password;
 	}
 
+
+	
+/*
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+	
+
+	public void addPost(Post post)    {        
+		if(posts == null) posts = new ArrayList<>();        
+		posts.add(post);        
+		post.setUser(this);  
+	}
+
+
+	public List<Response> getResponses() {
+		return responses;
+	}
+
+
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
+	}
+	
+
+	public void addResponse(Response resp)    {        
+		if(responses == null) posts = new ArrayList<>();        
+		responses.add(resp);        
+		resp.setUser(this);  
+	}
+*/
 
 	public int getId() {
 		return id;
@@ -128,7 +167,18 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+
 	public Profile getProfile() {
 		return profile;
 	}
@@ -138,7 +188,7 @@ public class User {
 		this.profile = profile;
 	}
 
-/*
+
 	public List<Post> getPosts() {
 		return posts;
 	}
@@ -146,13 +196,6 @@ public class User {
 
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
-	}
-	
-
-	public void addPost(Post post)    {        
-		if(posts == null) posts = new ArrayList<>();        
-		posts.add(post);        
-		post.setUser(this);  
 	}
 
 
@@ -164,14 +207,7 @@ public class User {
 	public void setResponses(List<Response> responses) {
 		this.responses = responses;
 	}
-	
 
-	public void addResponse(Response resp)    {        
-		if(responses == null) posts = new ArrayList<>();        
-		responses.add(resp);        
-		resp.setUser(this);  
-	}
-*/
 
 	@Override
 	public int hashCode() {
@@ -181,6 +217,10 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
+		result = prime * result + ((profile == null) ? 0 : profile.hashCode());
+		result = prime * result + ((responses == null) ? 0 : responses.hashCode());
+		result = prime * result + roleId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -212,6 +252,23 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (posts == null) {
+			if (other.posts != null)
+				return false;
+		} else if (!posts.equals(other.posts))
+			return false;
+		if (profile == null) {
+			if (other.profile != null)
+				return false;
+		} else if (!profile.equals(other.profile))
+			return false;
+		if (responses == null) {
+			if (other.responses != null)
+				return false;
+		} else if (!responses.equals(other.responses))
+			return false;
+		if (roleId != other.roleId)
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -224,9 +281,12 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", LastName=" + LastName
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", roleId=" + roleId + ", profile=" + profile + ", posts=" + posts
+				+ ", responses=" + responses + "]";
 	}
 
+
+	
 	
 
 

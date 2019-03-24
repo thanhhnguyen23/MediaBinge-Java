@@ -1,9 +1,13 @@
 package com.revature.repos;
 
+
 import java.util.List;
+
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +33,19 @@ public class UserRepo implements BasicRepo <User>{
 		Session session = factory.getCurrentSession();
 		return session.get(User.class, id);
 	}
-
+	public User getByCredentials(String username, String password)
+	{
+		Session session = factory.getCurrentSession();
+		Query myQuery = session.createQuery("from User u where u.username = :username AND u.password = :password");
+		myQuery.setParameter("username", username);
+		myQuery.setParameter("password", password);
+		List<User> myUser = myQuery.getResultList();
+		if(myUser.size() == 0)
+		{
+			return null;
+		}
+		return myUser.get(0);
+	}
 	@Override
 	public User add(User newUser) {
 		Session session = factory.getCurrentSession();
