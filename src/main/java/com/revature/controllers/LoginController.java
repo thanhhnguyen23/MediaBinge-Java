@@ -16,7 +16,7 @@ import com.revature.util.JwtConfig;
 import com.revature.util.JwtGenerator;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/")
 public class LoginController {
 
 private UserService service;
@@ -26,17 +26,16 @@ private UserService service;
 		this.service = userService;
 	}
 	
-	@PostMapping(value = "/{username},{password}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public HttpServletResponse login(@PathVariable String username, @PathVariable String password, HttpServletResponse resp)
+	@PostMapping(value = "/{username}/{password}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public User login(@PathVariable String username, @PathVariable String password, HttpServletResponse resp)
 	{
 		User user = service.getByCredentials(username, password);
 		resp.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + JwtGenerator.createJwt(user));
 		resp.addHeader("Info",Integer.toString(user.getId()));
-		resp.addHeader("UserRole", Integer.toString(user.getRoleId()));
 		resp.addHeader("UserFirstName", user.getFirstName());
 		resp.addHeader("UserLastName", user.getLastName());
 		resp.addHeader("UserName", user.getUsername());
-		return resp;
+		return user;
 		
 		
 	}

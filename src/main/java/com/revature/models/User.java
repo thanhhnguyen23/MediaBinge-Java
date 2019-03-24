@@ -42,8 +42,8 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name = "role_id")
-	private int roleId;
+//	@Column(name = "role_id")
+//	private int roleId;
 	
 
 	//TODO -- come back here
@@ -173,14 +173,14 @@ public class User {
 	}
 
 
-	public int getRoleId() {
-		return roleId;
-	}
+//	public int getRoleId() {
+//		return roleId;
+//	}
 
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
+//	public void setRoleId(int roleId) {
+//		this.roleId = roleId;
+//	}
 
 
 	public Profile getProfile() {
@@ -232,7 +232,7 @@ public class User {
 		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
 		result = prime * result + ((profile == null) ? 0 : profile.hashCode());
 		result = prime * result + ((responses == null) ? 0 : responses.hashCode());
-		result = prime * result + roleId;
+//		result = prime * result + roleId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -279,9 +279,7 @@ public class User {
 				return false;
 		} else if (!responses.equals(other.responses))
 			return false;
-		if (roleId != other.roleId)
-			return false;
-		if (username == null) {
+				if (username == null) {
 			if (other.username != null)
 				return false;
 		} else if (!username.equals(other.username))
@@ -293,7 +291,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", LastName=" + LastName
-				+ ", password=" + password + ", roleId=" + roleId + ", profile=" + profile + ", posts=" + posts
+				+ ", password=" + password + ", roleId=" + ", profile=" + profile + ", posts=" + posts
 				+ ", responses=" + responses + "]";
 	}
 

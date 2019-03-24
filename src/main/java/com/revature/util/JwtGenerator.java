@@ -28,7 +28,7 @@ public class JwtGenerator {
 				.setId(Integer.toString(subject.getId()))
 				.setSubject(subject.getUsername())
 				.setIssuer("revature")
-				.claim("role", subject.getRoleId())
+//				.claim("role", subject.getRoleId())
 				.claim("password", subject.getPassword())
 				.setExpiration(new Date(nowMillis + JwtConfig.EXPIRATION * 1000))
 				.signWith(signatureAlgorithm, JwtConfig.signingKey);
