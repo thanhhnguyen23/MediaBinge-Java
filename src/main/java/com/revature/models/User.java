@@ -16,8 +16,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-
 //TODO - do not forget to do roles
 
 @Entity
@@ -44,11 +42,9 @@ public class User {
 	
 
 	//TODO -- come back here
-	// commented out so we do not get errors until we're done with DAOs
-
 
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
-//	@JsonIgnore
+	@JsonIgnore
 	private Profile profile;
 
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)

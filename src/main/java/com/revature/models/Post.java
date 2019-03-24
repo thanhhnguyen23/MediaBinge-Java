@@ -35,8 +35,12 @@ public class Post {
 	@JsonIgnore
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(cascade={
+			CascadeType.PERSIST, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.REFRESH
+	})
 	@JoinColumn(name="topic_id")
+	@JsonIgnore //
 	private Topic topic;
 
 	@Column(name="post_text")
@@ -46,6 +50,7 @@ public class Post {
 	private Timestamp datePosted;
 	
 	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Response> responses;
 	
 

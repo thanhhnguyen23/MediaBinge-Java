@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MB_topics")
@@ -20,7 +23,8 @@ public class Topic {
 	private String topicName;
 
 	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL)
-	private List<Post> posts;
+	@JsonIgnore //maybe change later
+	private List<Post> posts = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -38,15 +42,18 @@ public class Topic {
 		this.topicName = topic;
 	}
 
-	public List<Post> getPost() {
+	public List<Post> getPosts() {
 		return posts;
 	}
 
-	public void setPost(List<Post> post) {
+	public void setPosts(List<Post> post) {
 		this.posts = post;
 	}
 	
-	//TODO Add a helper method to add 1 post to the topic rather than a list of posts 
+	//TODO Add a helper method to add 1 post to the topic rather than a list of posts
+	public void addPost(Post post) {
+		
+	}
 
 	@Override
 	public int hashCode() {
