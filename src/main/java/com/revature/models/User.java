@@ -48,6 +48,7 @@ public class User {
 
 
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+//	@JsonIgnore
 	private Profile profile;
 
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)

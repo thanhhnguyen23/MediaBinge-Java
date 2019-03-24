@@ -30,7 +30,7 @@ public class UserRepo implements BasicRepo <User>{
 	public User getById(int id) {
 		Session session = factory.getCurrentSession();
 		User user = session.get(User.class, id);
-		Hibernate.initialize(user.getPosts());
+		Hibernate.initialize(user.getPosts()); //may or may not be necessary
 		return user;
 	}
 
