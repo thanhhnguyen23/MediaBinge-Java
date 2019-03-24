@@ -12,9 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MB_posts")
@@ -31,13 +32,14 @@ public class Post {
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name="topic_id")
 	private Topic topic;
 
-	@Column(name="text")
+	@Column(name="post_text")
 	private String text;
 
 	@Column(name="date_posted")

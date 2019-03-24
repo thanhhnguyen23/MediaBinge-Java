@@ -5,6 +5,8 @@ import java.util.List;
 
 
 
+import org.hibernate.Hibernate;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -26,12 +28,15 @@ public class UserRepo implements BasicRepo <User>{
 	public List<User> getAll() {
 		Session session = factory.getCurrentSession();
 		return session.createQuery("from User", User.class).getResultList();
+		
 	}
 
 	@Override
 	public User getById(int id) {
 		Session session = factory.getCurrentSession();
-		return session.get(User.class, id);
+		User user = session.get(User.class, id);
+		Hibernate.initialize(user.getPosts()); //may or may not be necessary
+		return user;
 	}
 	public User getByCredentials(String username, String password)
 	{

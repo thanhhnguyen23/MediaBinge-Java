@@ -34,13 +34,19 @@ public class ProfileController {
 		return service.getAll();
 	}
 	
-	//@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Profile getProfileById(@PathVariable int id) {
 		Profile profile = service.getById(id);
 		return profile;	
 	}
-	
+	/**
+	 * currently not working
+	 * wants a user object but won't read one when given
+	 * attempted to create a constructor that took in a user id
+	 * json still reads user as null and ignore userId
+	 * @param newProfile
+	 * @return
+	 */
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public Profile addProfile(@RequestBody Profile newProfile) {

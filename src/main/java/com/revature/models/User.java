@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 //TODO - do not forget to do roles
@@ -49,13 +51,15 @@ public class User {
 
 
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+//	@JsonIgnore
 	private Profile profile;
 
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
+	private List<Post> posts = new ArrayList<>();
 
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	private List<Post> posts;
-
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Response> responses;
 
 
@@ -207,6 +211,14 @@ public class User {
 	public void setResponses(List<Response> responses) {
 		this.responses = responses;
 	}
+
+
+	public void addResponse(Response resp)    {        
+		if(responses == null) posts = new ArrayList<>();        
+		responses.add(resp);        
+		resp.setUser(this);  
+	}
+
 
 
 	@Override

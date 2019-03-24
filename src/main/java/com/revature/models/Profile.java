@@ -11,9 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="MB_profile")
 @SequenceGenerator(name="profile_seq", sequenceName="mb_profile_pk_seq", allocationSize=1)
+
 public class Profile {
 	@Id
 	@Column(name="profile_id")
@@ -29,9 +32,44 @@ public class Profile {
 	@Column(name="favorite_tv_shows")
 	private String favoriteTvShows;
 	
+	/* Testing json ignore
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User user;
+	*/
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	@JsonIgnore
+	private User user;
+	
+
+	public Profile() {
+		super();
+	}
+
+	public Profile(int profileId, String favoriteMovies, String favoriteBooks, String favoriteTvShows, User user) {
+		super();
+		this.profileId = profileId;
+		this.favoriteMovies = favoriteMovies;
+		this.favoriteBooks = favoriteBooks;
+		this.favoriteTvShows = favoriteTvShows;
+		this.user = user;
+	}
+	
+	public Profile(int userId) {
+		this.user = new User();
+		user.setId(userId);
+	}
+
+	public Profile(String favoriteMovies, String favoriteBooks, String favoriteTvShows, int userId) {
+		super();
+		this.favoriteMovies = favoriteMovies;
+		this.favoriteBooks = favoriteBooks;
+		this.favoriteTvShows = favoriteTvShows;
+		this.user = new User();
+		user.setId(userId);
+	}
 
 	public int getProfileId() {
 		return profileId;
@@ -64,9 +102,13 @@ public class Profile {
 	public void setFavoriteTvShows(String favoriteTvShows) {
 		this.favoriteTvShows = favoriteTvShows;
 	}
-
+	
 	public User getUser() {
 		return user;
+	}
+	
+	public int getUserId() {
+		return this.user.getId();
 	}
 
 	public void setUser(User user) {
@@ -122,7 +164,7 @@ public class Profile {
 	@Override
 	public String toString() {
 		return "Profile [profileId=" + profileId + ", favoriteMovies=" + favoriteMovies + ", favoriteBooks="
-				+ favoriteBooks + ", favoriteTvShows=" + favoriteTvShows + "]";
+				+ favoriteBooks + ", favoriteTvShows=" + favoriteTvShows + "user= " + this.getUserId() + "]";
 	}
 
 }

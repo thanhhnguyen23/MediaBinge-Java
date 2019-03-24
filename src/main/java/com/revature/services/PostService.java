@@ -3,11 +3,13 @@ package com.revature.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Post;
 import com.revature.repos.PostRepo;
 
+@Component
 public class PostService {
 	
 	private PostRepo repo;
