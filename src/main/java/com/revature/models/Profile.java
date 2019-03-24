@@ -11,9 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="MB_profile")
 @SequenceGenerator(name="profile_seq", sequenceName="mb_profile_pk_seq", allocationSize=1)
+
 public class Profile {
 	@Id
 	@Column(name="profile_id")
@@ -64,7 +67,7 @@ public class Profile {
 	public void setFavoriteTvShows(String favoriteTvShows) {
 		this.favoriteTvShows = favoriteTvShows;
 	}
-
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

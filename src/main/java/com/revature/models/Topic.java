@@ -16,6 +16,7 @@ public class Topic {
 	@Id
 	private int id;
 	
+	@Column(name="topic")
 	private String topicName;
 
 	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL)

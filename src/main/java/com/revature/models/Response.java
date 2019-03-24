@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name="MB_responses")
 @SequenceGenerator(name="response_seq", sequenceName="mb_response_pk_seq", allocationSize=1)
@@ -37,6 +40,7 @@ public class Response {
 		CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User user;
 
 	public int getResponseId() {
@@ -113,7 +117,7 @@ public class Response {
 
 	@Override
 	public String toString() {
-		return "Response [responseId=" + responseId + ", text=" + text + ", post=" + post + ", user=" + user + "]";
+		return "Response [responseId=" + responseId + ", text=" + text + ", post=" + post.getPostId() + ", user=" + user.getId() + "]";
 	}
 	
 	
