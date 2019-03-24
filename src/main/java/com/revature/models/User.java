@@ -48,7 +48,7 @@ public class User {
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 	private Profile profile;
 
-	
+
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private List<Post> posts;
 
@@ -129,12 +129,49 @@ public class User {
 		this.password = password;
 	}
 	
+	public Profile getProfile() {
+		return profile;
+	}
+
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+/*
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+	
+
 	public void addPost(Post post)    {        
 		if(posts == null) posts = new ArrayList<>();        
 		posts.add(post);        
 		post.setUser(this);  
-		}
+	}
 
+
+	public List<Response> getResponses() {
+		return responses;
+	}
+
+
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
+	}
+	
+
+	public void addResponse(Response resp)    {        
+		if(responses == null) posts = new ArrayList<>();        
+		responses.add(resp);        
+		resp.setUser(this);  
+	}
+*/
 
 	@Override
 	public int hashCode() {

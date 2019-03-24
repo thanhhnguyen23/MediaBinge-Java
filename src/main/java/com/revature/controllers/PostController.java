@@ -1,9 +1,9 @@
 package com.revature.controllers;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,54 +12,52 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.User;
-import com.revature.services.UserService;
+import com.revature.models.Post;
+import com.revature.services.PostService;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/post")
+public class PostController {
 	
-	private UserService service;
+	private PostService service;
 	
 	@Autowired
-	public UserController(UserService userService) {
-		this.service = userService;
+	public PostController(PostService postService) {
+		this.service = postService;
 	}
 	
+	//READ
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getAll(){
+	public List<Post> getAll(){
 		return service.getAll();
 	}
 	
-//	@GetMapping(value="/{id)", produces=MediaType.APPLICATION_JSON_VALUE)
-	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public User getUserById(@PathVariable int id) {
-		User user = service.getById(id);
-		return user;
+	@GetMapping(value="/{id}")
+	public Post getById(@PathVariable int id) {
+		return service.getById(id);
 	}
 	
-	@ResponseStatus(HttpStatus.CREATED)
+	//ADD
+	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public User addUser(@RequestBody User newUser) {
-		return service.add(newUser);
+	public Post addPost(Post newPost) {
+		return service.add(newPost);
 	}
 	
+	//UPDATE
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces="application/json")
-	public User updateUser(@RequestBody User updateUser) {
-		User user = service.update(updateUser);
-		return user;
+	public Post editPost(@RequestBody Post updatedPost) {
+		return service.update(updatedPost);
 	}
 	
-	//TODO Throws an exception, possibly because user has no posts
 	@DeleteMapping(value="/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteUser(@PathVariable int id) {
+	public void deletePost(@PathVariable int id) {
 		service.delete(id);
 	}
 	
