@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.models.Post;
+import com.revature.models.User;
 
 @Component
 public class PostRepo implements BasicRepo<Post>{
@@ -33,6 +34,16 @@ public class PostRepo implements BasicRepo<Post>{
 	@Override
 	public Post add(Post newPost) {
 		Session session = factory.getCurrentSession();
+		User user = session.get(User.class, newPost.getUser().getId());
+		newPost.setUser(user);
+		session.save(newPost);
+		return newPost;
+	}
+	
+	public Post add(Post newPost, int userId) {
+		Session session = factory.getCurrentSession();
+		User user = session.get(User.class, userId);
+		newPost.setUser(user);
 		session.save(newPost);
 		return newPost;
 	}

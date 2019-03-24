@@ -32,7 +32,7 @@ public class Post {
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="user_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private User user;
 	
 	@ManyToOne(cascade={
