@@ -32,7 +32,7 @@ public class Post {
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="user_id")
-//	@JsonIgnore
+	@JsonIgnore
 	private User user;
 	
 	@ManyToOne(cascade={
@@ -87,6 +87,11 @@ public class Post {
 	public User getUser() {
 		return user;
 	}
+	
+	public int getUserId() {
+		return this.user.getId();
+	}
+
 
 	public void setUser(User user) {
 		this.user = user;
@@ -94,6 +99,10 @@ public class Post {
 
 	public Topic getTopic() {
 		return topic;
+	}
+	
+	public int getTopicId() {
+		return this.getTopic().getId();
 	}
 
 	public void setTopic(Topic topic) {
@@ -172,6 +181,6 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted + "]";
+		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted + this.getUserId() +"]";
 	}
 }
