@@ -25,7 +25,7 @@ public class Response {
 	@Column(name="response_id")
 	private int responseId;
 	
-	@Column(name="text")
+	@Column(name="response_text")
 	private String text;
 	
 	@ManyToOne(cascade={
@@ -42,6 +42,16 @@ public class Response {
 	@JoinColumn(name="user_id")
 	@JsonIgnore
 	private User user;
+	
+	String api_call;
+
+	public String getApi_call() {
+		return api_call;
+	}
+
+	public void setApi_call(String api_call) {
+		this.api_call = api_call;
+	}
 
 	public int getResponseId() {
 		return responseId;

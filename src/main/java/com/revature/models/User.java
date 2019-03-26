@@ -40,8 +40,13 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	@Column(name="role_id")
+	private String role_id;
+	
 
 	//TODO -- come back here
+
+
 
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 	@JsonIgnore
@@ -137,6 +142,16 @@ public class User {
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
+	
+	public String getRole() {
+		return role_id;
+	}
+
+
+	public void setRole(String role) {
+		this.role_id = role;
+	}
+
 
 /*
 	public List<Post> getPosts() {
