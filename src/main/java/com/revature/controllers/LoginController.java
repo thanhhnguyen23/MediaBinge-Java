@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import com.revature.util.JwtConfig;
 import com.revature.util.JwtGenerator;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginController {
 
 private UserService service;
@@ -26,10 +27,11 @@ private UserService service;
 		this.service = userService;
 	}
 	
-	@PostMapping(value = "/{username}/{password}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public User login(@PathVariable String username, @PathVariable String password, HttpServletResponse resp)
+	@PostMapping(consumes = "application/json", produces=MediaType.APPLICATION_JSON_VALUE)
+	public User login(@RequestBody User credentials, HttpServletResponse resp)
 	{
-		User user = service.getByCredentials(username, password);
+		System.out.println(resp);
+		User user = service.getByCredentials(credentials.getUsername(), credentials.getPassword());
 		resp.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + JwtGenerator.createJwt(user));
 		resp.addHeader("Info",Integer.toString(user.getId()));
 		resp.addHeader("UserFirstName", user.getFirstName());
