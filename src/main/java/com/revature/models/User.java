@@ -45,184 +45,77 @@ public class User {
 	
 
 	//TODO -- come back here
-
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
+	private List<Post> posts;
+	
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Profile profile;
-
-//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-//	@JsonIgnore
-//	private List<Post> posts = new ArrayList<>();
-//
-//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-//	@JsonIgnore
-//	private List<Response> responses;
-
-
 	public User() {
 		super();
 	}
-
-
-	public User(String username, String firstName, String lastName, String password) {
-		super();
-		this.username = username;
-		this.firstName = firstName;
-		LastName = lastName;
-		this.password = password;
-	}
-
-
-	public User(int id, String username, String firstName, String lastName, String password) {
+	public User(int id, String username, String firstName, String lastName, String password, Profile profile) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.firstName = firstName;
 		LastName = lastName;
 		this.password = password;
+		this.profile = profile;
 	}
-	
-	public User(String username, String password)
-	{
-		super();
-		this.username = username;
-		this.password = password;
+	public void addPost(Post post) {
+		if(posts == null) posts = new ArrayList<>();
+		posts.add(post);
+		post.setUser(this);
 	}
-
-
-	
-/*
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-	
-
-	public void addPost(Post post)    {        
-		if(posts == null) posts = new ArrayList<>();        
-		posts.add(post);        
-		post.setUser(this);  
-	}
-
-
-	public List<Response> getResponses() {
-		return responses;
-	}
-
-
-	public void setResponses(List<Response> responses) {
-		this.responses = responses;
-	}
-	
-
-	public void addResponse(Response resp)    {        
-		if(responses == null) posts = new ArrayList<>();        
-		responses.add(resp);        
-		resp.setUser(this);  
-	}
-*/
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
-
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
 	public String getLastName() {
 		return LastName;
 	}
-
 
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
-//	public int getRoleId() {
-//		return roleId;
-//	}
-
-
-//	public void setRoleId(int roleId) {
-//		this.roleId = roleId;
-//	}
-
-
 	public Profile getProfile() {
 		return profile;
 	}
 
-
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
-
-/*
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-
-
-	public List<Response> getResponses() {
-		return responses;
-	}
-
-
-	public void setResponses(List<Response> responses) {
-		this.responses = responses;
-	}
-
-
-	public void addResponse(Response resp)    {        
-		if(responses == null) posts = new ArrayList<>();        
-		responses.add(resp);        
-		resp.setUser(this);  
-	}
-*/
-
 
 	@Override
 	public int hashCode() {
@@ -232,14 +125,10 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
 		result = prime * result + ((profile == null) ? 0 : profile.hashCode());
-		result = prime * result + ((responses == null) ? 0 : responses.hashCode());
-//		result = prime * result + roleId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -267,22 +156,12 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (posts == null) {
-			if (other.posts != null)
-				return false;
-		} else if (!posts.equals(other.posts))
-			return false;
 		if (profile == null) {
 			if (other.profile != null)
 				return false;
 		} else if (!profile.equals(other.profile))
 			return false;
-		if (responses == null) {
-			if (other.responses != null)
-				return false;
-		} else if (!responses.equals(other.responses))
-			return false;
-				if (username == null) {
+		if (username == null) {
 			if (other.username != null)
 				return false;
 		} else if (!username.equals(other.username))
@@ -290,13 +169,20 @@ public class User {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", LastName=" + LastName
-				+ ", password=" + password + ", profile=" + profile +"]";
+				+ ", password=" + password + "]";
 	}
 
+	
+//
+//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Response> responses;
+
+
+	
 
 	
 	

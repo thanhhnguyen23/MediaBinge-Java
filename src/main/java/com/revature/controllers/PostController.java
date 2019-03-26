@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Post;
+import com.revature.models.Principal;
 import com.revature.services.PostService;
 
 @RestController
@@ -33,28 +37,35 @@ public class PostController {
 	//READ
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Post> getAll(){
+	public List<Post> getAll(@RequestAttribute("principal") Principal principal){
 		return service.getAll();
 	}
 	
+	@RequestMapping(value="/user={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Post> getByUserId(@PathVariable int id) {
+		System.out.println(id);
+		return service.getByUserId(id);
+	}
 	@GetMapping(value="/{id}")
 	public Post getById(@PathVariable int id) {
 		return service.getById(id);
 	}
-	
-	//ADD
-//	@ResponseStatus(HttpStatus.ACCEPTED)
-//	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-//	public Post addPost(Post newPost) {
-//		return service.add(newPost);
-//	}
-	
+
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PostMapping(value="/topic={topicId}/user={userId}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public Post addPost(@RequestBody Post newPost, @PathVariable int userId, @PathVariable int topicId) {
-		return service.add(newPost, userId, topicId);
+	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public Post addPost(@RequestBody Post newPost, @RequestAttribute("principal") Principal principal) {
+		System.out.println(newPost);
+		System.out.println(principal);
+		newPost.setDatePosted(new Timestamp(System.currentTimeMillis()));
+		return service.add(newPost, Integer.parseInt(principal.getId()));
 	}
 	
+//	@ResponseStatus(HttpStatus.ACCEPTED)
+//	@PostMapping(value="/topic={topicId}/user={userId}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+//	public Post addPost(@RequestBody Post newPost) {
+//		return service.add(newPost, userId, topicId);
+//	}
+//	
 	//UPDATE
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces="application/json")

@@ -3,7 +3,7 @@ package com.revature.models;
 public class Principal {
 		private String id;
 		private String password;
-		private String role;
+//		private String role;
 		
 		public Principal() {
 			super();
@@ -25,16 +25,16 @@ public class Principal {
 			this.password = password;
 		}
 
-		public String getRole() {
-			return role;
-		}
-
-		public void setRole(String role) {
-			this.role = role;
-		}
+//		public String getRole() {
+//			return role;
+//		}
+//
+//		public void setRole(String role) {
+//			this.role = role;
+//		}
 
 		@Override
 		public String toString() {
-			return "Principal [id=" + id + ", password=" + password + ", role=" + role + "]";
+			return "Principal [id=" + id + ", password=" + password  + "]";
 		}
 }

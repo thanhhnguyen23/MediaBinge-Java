@@ -53,7 +53,7 @@ public class JwtFilter extends HttpFilter {
 			// 5. Obtain the principal/subject stored in the JWT
 			Principal principal = new Principal();
 			principal.setId(claims.getId());
-			principal.setRole(claims.get("role", String.class));
+//			principal.setRole(claims.get("role", String.class));
 			principal.setPassword(claims.get("password", String.class));
 			
 			

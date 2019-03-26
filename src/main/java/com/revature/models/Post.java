@@ -32,7 +32,7 @@ public class Post {
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="user_id")
-	@JsonIgnore
+	//@JsonIgnore
 	private User user;
 	
 	@ManyToOne(cascade={
@@ -40,7 +40,7 @@ public class Post {
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="topic_id")
-//	@JsonIgnore 
+	//@JsonIgnore
 	private Topic topic;
 
 	@Column(name="post_text")
@@ -53,24 +53,29 @@ public class Post {
 	@JsonIgnore
 	private List<Response> responses;
 	
-
-	public Post(int postId, User user, Topic topic, String text, Timestamp datePosted, List<Response> responses) {
-		super();
+	public Post(int postId, String text, Timestamp datePosted)
+	{
 		this.postId = postId;
-		this.user = user;
-		this.topic = topic;
 		this.text = text;
 		this.datePosted = datePosted;
-		this.responses = responses;
 	}
+//	public Post(int postId, User user, Topic topic, String text, Timestamp datePosted, List<Response> responses) {
+//		super();
+//		this.postId = postId;
+//		this.user = user;
+//		this.topic = topic;
+//		this.text = text;
+//		this.datePosted = datePosted;
+//		this.responses = responses;
+//	}
 
-	public Post(User user, Topic topic, String text, Timestamp datePosted) {
-		super();
-		this.user = user;
-		this.topic = topic;
-		this.text = text;
-		this.datePosted = datePosted;
-	}
+//	public Post(User user, Topic topic, String text, Timestamp datePosted) {
+//		super();
+//		this.user = user;
+//		this.topic = topic;
+//		this.text = text;
+//		this.datePosted = datePosted;
+//	}
 
 	public Post() {
 		super();
@@ -88,9 +93,9 @@ public class Post {
 		return user;
 	}
 	
-	public int getUserId() {
-		return this.user.getId();
-	}
+//	public int getUserId() {
+//		return this.user.getId();
+//	}
 
 
 	public void setUser(User user) {
@@ -101,9 +106,9 @@ public class Post {
 		return topic;
 	}
 	
-	public int getTopicId() {
-		return this.getTopic().getId();
-	}
+//	public int getTopicId() {
+//		return this.getTopic().getId();
+//	}
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
@@ -181,6 +186,6 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted + this.getUserId() +"]";
+		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted +"]";
 	}
 }

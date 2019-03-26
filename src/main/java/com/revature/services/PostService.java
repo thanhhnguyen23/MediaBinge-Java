@@ -7,22 +7,32 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Post;
+import com.revature.models.User;
 import com.revature.repos.PostRepo;
+import com.revature.repos.UserRepo;
 
 @Component
 public class PostService {
 	
 	private PostRepo repo;
+	private UserRepo uRepo;
+	
 	
 	@Autowired
-	public PostService(PostRepo postRepo) {
+	public PostService(PostRepo postRepo, UserRepo userRepo) {
 		this.repo = postRepo;
+		this.uRepo = userRepo;
 	}
 	
 	@Transactional(readOnly = true)
 	public List<Post> getAll(){
 		return repo.getAll();
 	}
+	@Transactional(readOnly = true)
+		public List<Post> getByUserId(int id)
+		{
+			return repo.getByUserId(id);
+		}
 	
 	@Transactional(readOnly = true)
 	public Post getById(int id) {
@@ -30,9 +40,14 @@ public class PostService {
 	}
 	
 	@Transactional
-	public Post add(Post newPost, int userId, int topicId) {
-		if(newPost != null && userId > 0 && topicId > 0) {
-			return repo.add(newPost, userId, topicId);
+	public Post add(Post newPost, int id) {
+		if(newPost != null) {
+			User user = uRepo.getById(id);
+			
+			System.out.println(user);
+			newPost.setUser(user);
+			user.addPost(newPost);
+			return repo.add(newPost);
 		}
 		return null;
 		//TODO throw custom exception
