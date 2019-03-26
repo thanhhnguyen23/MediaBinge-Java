@@ -50,8 +50,10 @@ public class ProfileService {
 	}
 	
 	@Transactional 
-	public Profile update(Profile updatedProfile) {
+	public Profile update(Profile updatedProfile, int id) {
 		if(updatedProfile != null) {
+			User user = uRepo.getById(id);
+			updatedProfile.setUser(user);
 			return proRepo.update(updatedProfile);
 		}
 		return null; 

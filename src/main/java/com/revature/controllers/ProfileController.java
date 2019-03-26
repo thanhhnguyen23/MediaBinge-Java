@@ -66,8 +66,9 @@ public class ProfileController {
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Profile updateProfile(@RequestBody Profile updatedProfile) {
-		Profile profile = service.update(updatedProfile);
+	public Profile updateProfile(@RequestBody Profile updatedProfile, @RequestAttribute("principal") Principal principal) {
+		
+		Profile profile = service.update(updatedProfile, Integer.parseInt(principal.getId()));
 		return profile;
 	}
 	
