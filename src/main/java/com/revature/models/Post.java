@@ -35,8 +35,12 @@ public class Post {
 	@JsonIgnore
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(cascade={
+			CascadeType.PERSIST, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.REFRESH
+	})
 	@JoinColumn(name="topic_id")
+//	@JsonIgnore 
 	private Topic topic;
 
 	@Column(name="post_text")
@@ -46,6 +50,7 @@ public class Post {
 	private Timestamp datePosted;
 	
 	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Response> responses;
 	
 
@@ -82,6 +87,11 @@ public class Post {
 	public User getUser() {
 		return user;
 	}
+	
+	public int getUserId() {
+		return this.user.getId();
+	}
+
 
 	public void setUser(User user) {
 		this.user = user;
@@ -89,6 +99,10 @@ public class Post {
 
 	public Topic getTopic() {
 		return topic;
+	}
+	
+	public int getTopicId() {
+		return this.getTopic().getId();
 	}
 
 	public void setTopic(Topic topic) {
@@ -167,6 +181,6 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted + "]";
+		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted + this.getUserId() +"]";
 	}
 }

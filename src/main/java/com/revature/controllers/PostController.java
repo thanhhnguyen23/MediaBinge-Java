@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,10 +43,16 @@ public class PostController {
 	}
 	
 	//ADD
+//	@ResponseStatus(HttpStatus.ACCEPTED)
+//	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+//	public Post addPost(Post newPost) {
+//		return service.add(newPost);
+//	}
+	
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public Post addPost(Post newPost) {
-		return service.add(newPost);
+	@PostMapping(value="/topic={topicId}/user={userId}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public Post addPost(@RequestBody Post newPost, @PathVariable int userId, @PathVariable int topicId) {
+		return service.add(newPost, userId, topicId);
 	}
 	
 	//UPDATE
