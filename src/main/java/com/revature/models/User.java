@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //TODO - do not forget to do roles
 
@@ -41,99 +41,92 @@ public class User {
 	private String password;
 	
 
-	//TODO -- come back here
-	// commented out so we do not get errors until we're done with DAOs
+	@Column(name = "role_id")
+	private int roleId;
+	
 
+	//TODO -- come back here
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
+	private List<Post> posts;
+	
 
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private Profile profile;
-
-	
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	private List<Post> posts;
-
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	private List<Response> responses;
-
-
 	public User() {
 		super();
 	}
-
-
-	public User(String username, String firstName, String lastName, String password) {
-		super();
-		this.username = username;
-		this.firstName = firstName;
-		LastName = lastName;
-		this.password = password;
-	}
-
-
-	public User(int id, String username, String firstName, String lastName, String password) {
+	public User(int id, String username, String firstName, String lastName, String password, Profile profile) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.firstName = firstName;
 		LastName = lastName;
 		this.password = password;
+		this.profile = profile;
 	}
-
-
+	public void addPost(Post post) {
+		if(posts == null) posts = new ArrayList<>();
+		posts.add(post);
+		post.setUser(this);
+	}
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
-
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
 	public String getLastName() {
 		return LastName;
 	}
-
 
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 	
-	public void addPost(Post post)    {        
-		if(posts == null) posts = new ArrayList<>();        
-		posts.add(post);        
-		post.setUser(this);  
-		}
+	public int getRole() {
+		return roleId;
+	}
+
+
+	public void setRole(int role) {
+		this.roleId = role;
+	}
 
 
 	@Override
@@ -144,10 +137,10 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((profile == null) ? 0 : profile.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -175,6 +168,11 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (profile == null) {
+			if (other.profile != null)
+				return false;
+		} else if (!profile.equals(other.profile))
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -183,13 +181,22 @@ public class User {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", LastName=" + LastName
 				+ ", password=" + password + "]";
 	}
 
+	
+//
+//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Response> responses;
+
+
+	
+
+	
 	
 
 

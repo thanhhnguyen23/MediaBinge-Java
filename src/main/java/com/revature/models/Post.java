@@ -12,9 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MB_posts")
@@ -31,39 +32,50 @@ public class Post {
 			CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="user_id")
+	//@JsonIgnore
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(cascade={
+			CascadeType.PERSIST, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.REFRESH
+	})
 	@JoinColumn(name="topic_id")
+	//@JsonIgnore
 	private Topic topic;
 
-	@Column(name="text")
+	@Column(name="post_text")
 	private String text;
 
 	@Column(name="date_posted")
 	private Timestamp datePosted;
 	
 	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Response> responses;
 	
-
-	public Post(int postId, User user, Topic topic, String text, Timestamp datePosted, List<Response> responses) {
-		super();
+	public Post(int postId, String text, Timestamp datePosted)
+	{
 		this.postId = postId;
-		this.user = user;
-		this.topic = topic;
 		this.text = text;
 		this.datePosted = datePosted;
-		this.responses = responses;
 	}
+//	public Post(int postId, User user, Topic topic, String text, Timestamp datePosted, List<Response> responses) {
+//		super();
+//		this.postId = postId;
+//		this.user = user;
+//		this.topic = topic;
+//		this.text = text;
+//		this.datePosted = datePosted;
+//		this.responses = responses;
+//	}
 
-	public Post(User user, Topic topic, String text, Timestamp datePosted) {
-		super();
-		this.user = user;
-		this.topic = topic;
-		this.text = text;
-		this.datePosted = datePosted;
-	}
+//	public Post(User user, Topic topic, String text, Timestamp datePosted) {
+//		super();
+//		this.user = user;
+//		this.topic = topic;
+//		this.text = text;
+//		this.datePosted = datePosted;
+//	}
 
 	public Post() {
 		super();
@@ -80,6 +92,11 @@ public class Post {
 	public User getUser() {
 		return user;
 	}
+	
+//	public int getUserId() {
+//		return this.user.getId();
+//	}
+
 
 	public void setUser(User user) {
 		this.user = user;
@@ -88,6 +105,10 @@ public class Post {
 	public Topic getTopic() {
 		return topic;
 	}
+	
+//	public int getTopicId() {
+//		return this.getTopic().getId();
+//	}
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
@@ -165,6 +186,6 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted + "]";
+		return "Post [postId=" + postId + ", text=" + text + ", datePosted=" + datePosted +"]";
 	}
 }

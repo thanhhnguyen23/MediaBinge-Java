@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.models.Profile;
+import com.revature.models.User;
 @Component
 public class ProfileRepo implements BasicRepo<Profile>{
 	
@@ -35,10 +36,16 @@ public class ProfileRepo implements BasicRepo<Profile>{
 
 	@Override
 	public Profile add(Profile newProfile) {
-
-		Session session = factory.getCurrentSession();
-		session.save(newProfile);
-		return newProfile;
+//		Session session = factory.getCurrentSession();
+		System.out.println(newProfile);
+//		System.out.println(newProfile.getUserId());
+//		User user = session.get(User.class, newProfile.getUserId());
+//		if(user != null) {
+//			user.setProfile(newProfile);
+//			session.save(newProfile);
+//			return newProfile;
+//		}//TODO throw an exception here
+		return null;
 	}
 
 	@Override

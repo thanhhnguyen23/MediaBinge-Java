@@ -29,6 +29,12 @@ public class UserService {
 		return uRepo.getById(id);
 	}
 	
+	@Transactional(readOnly = true)
+	public User getByCredentials(String username, String password)
+	{
+		return uRepo.getByCredentials(username, password);
+	}
+	
 	@Transactional
 	public User add(User newUser) {
 		if(newUser != null) {
