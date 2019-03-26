@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,12 +30,13 @@ public class ProfileController {
 		this.service = profileService;
 	}
 	
-	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+//	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Profile> getAll(){
 		return service.getAll();
 	}
 	
-	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/{id}")
 	public Profile getProfileById(@PathVariable int id) {
 		Profile profile = service.getById(id);
 		return profile;	

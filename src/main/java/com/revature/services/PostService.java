@@ -30,9 +30,9 @@ public class PostService {
 	}
 	
 	@Transactional
-	public Post add(Post newPost) {
-		if(newPost != null) {
-			return repo.add(newPost);
+	public Post add(Post newPost, int userId, int topicId) {
+		if(newPost != null && userId > 0 && topicId > 0) {
+			return repo.add(newPost, userId, topicId);
 		}
 		return null;
 		//TODO throw custom exception

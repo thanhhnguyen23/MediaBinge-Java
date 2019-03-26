@@ -36,15 +36,15 @@ public class ProfileRepo implements BasicRepo<Profile>{
 
 	@Override
 	public Profile add(Profile newProfile) {
-		Session session = factory.getCurrentSession();
+//		Session session = factory.getCurrentSession();
 		System.out.println(newProfile);
-		System.out.println(newProfile.getUserId());
-		User user = session.get(User.class, newProfile.getUserId());
-		if(user != null) {
-			user.setProfile(newProfile);
-			session.save(newProfile);
-			return newProfile;
-		}//TODO throw an exception here
+//		System.out.println(newProfile.getUserId());
+//		User user = session.get(User.class, newProfile.getUserId());
+//		if(user != null) {
+//			user.setProfile(newProfile);
+//			session.save(newProfile);
+//			return newProfile;
+//		}//TODO throw an exception here
 		return null;
 	}
 

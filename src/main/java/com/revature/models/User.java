@@ -16,8 +16,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-
 //TODO - do not forget to do roles
 
 @Entity
@@ -47,20 +45,18 @@ public class User {
 	
 
 	//TODO -- come back here
-	// commented out so we do not get errors until we're done with DAOs
-
 
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
-//	@JsonIgnore
+	@JsonIgnore
 	private Profile profile;
 
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	@JsonIgnore
-	private List<Post> posts = new ArrayList<>();
-
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	@JsonIgnore
-	private List<Response> responses;
+//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Post> posts = new ArrayList<>();
+//
+//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Response> responses;
 
 
 	public User() {
@@ -192,7 +188,7 @@ public class User {
 		this.profile = profile;
 	}
 
-
+/*
 	public List<Post> getPosts() {
 		return posts;
 	}
@@ -218,7 +214,7 @@ public class User {
 		responses.add(resp);        
 		resp.setUser(this);  
 	}
-
+*/
 
 
 	@Override
