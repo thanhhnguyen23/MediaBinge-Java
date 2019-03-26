@@ -37,15 +37,16 @@ public class PostController {
 	//READ
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Post> getAll(@RequestAttribute("principal") Principal principal){
+	public List<Post> getAll(){
 		return service.getAll();
 	}
-	
+	//GET BY USER ID
 	@RequestMapping(value="/user={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getByUserId(@PathVariable int id) {
 		System.out.println(id);
 		return service.getByUserId(id);
 	}
+	//GET BY POST ID
 	@GetMapping(value="/{id}")
 	public Post getById(@PathVariable int id) {
 		return service.getById(id);
@@ -54,18 +55,10 @@ public class PostController {
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public Post addPost(@RequestBody Post newPost, @RequestAttribute("principal") Principal principal) {
-		System.out.println(newPost);
-		System.out.println(principal);
 		newPost.setDatePosted(new Timestamp(System.currentTimeMillis()));
 		return service.add(newPost, Integer.parseInt(principal.getId()));
 	}
-	
-//	@ResponseStatus(HttpStatus.ACCEPTED)
-//	@PostMapping(value="/topic={topicId}/user={userId}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-//	public Post addPost(@RequestBody Post newPost) {
-//		return service.add(newPost, userId, topicId);
-//	}
-//	
+		
 	//UPDATE
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces="application/json")
