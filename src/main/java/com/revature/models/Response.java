@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.sql.Timestamp;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,11 +42,41 @@ public class Response {
 		CascadeType.MERGE, CascadeType.REFRESH
 	})
 	@JoinColumn(name="user_id")
-	@JsonIgnore
 	private User user;
 	
-	String api_call;
-
+	@Column(name = "api_call")
+	private String api_call;
+	
+	@Column(name = "date_posted")
+	private Timestamp datePosted;
+	
+	public Response() {
+		super();
+	}
+	public Response(int responseId, String text, Post post, User user, String api_call, Timestamp datePosted) {
+		super();
+		this.responseId = responseId;
+		this.text = text;
+		this.post = post;
+		this.user = user;
+		this.api_call = api_call;
+		this.datePosted = datePosted;
+	}
+	
+	public Response(int responseId, String text, String api_call, Timestamp datePosted)
+	{
+		this.responseId = responseId;
+		this.text = text;
+		this.api_call = api_call;
+		this.datePosted = datePosted;
+	}
+	
+	public Timestamp getDatePosted() {
+		return datePosted;
+	}
+	public void setDatePosted(Timestamp datePosted) {
+		this.datePosted = datePosted;
+	}
 	public String getApi_call() {
 		return api_call;
 	}

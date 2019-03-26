@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -137,7 +138,11 @@ public class Post {
 	public void setResponses(List<Response> responses) {
 		this.responses = responses;
 	}
-
+	public void addResponse(Response response) {
+		if(responses == null) responses = new ArrayList<>();
+		responses.add(response);
+		response.setPost(this);
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

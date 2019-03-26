@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.revature.models.Post;
 import com.revature.models.Response;
 
 @Component
@@ -22,6 +24,21 @@ public class ResponseRepo implements BasicRepo<Response>{
 	public List<Response> getAll() {
 		Session session = factory.getCurrentSession();
 		return session.createQuery("from Response", Response.class).getResultList();
+	}
+	
+	public List<Response> getByUserId(int id){
+		Session session = factory.getCurrentSession();
+		Query myQuery = session.createQuery("from Response r where r.user.id = :userId");
+		myQuery.setParameter("userId", id);
+		List<Response> responses = myQuery.getResultList();
+		return responses;
+	}
+	public List<Response> getByPostId(int id){
+		Session session = factory.getCurrentSession();
+		Query myQuery = session.createQuery("from Response r where r.post.id = :postId");
+		myQuery.setParameter("postId", id);
+		List<Response> responses = myQuery.getResultList();
+		return responses;
 	}
 
 	@Override
