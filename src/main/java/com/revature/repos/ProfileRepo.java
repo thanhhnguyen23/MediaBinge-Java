@@ -63,9 +63,14 @@ public class ProfileRepo implements BasicRepo<Profile>{
 
 		Session session = factory.getCurrentSession();
 		Profile profile = session.get(Profile.class, updatedProfile.getProfileId());
-		if(profile == null) return null;
-		else profile = updatedProfile;
+		System.out.println(profile);
+		if(profile == null) { return null;}
+		else { 
+		profile.setFavoriteBooks(updatedProfile.getFavoriteBooks());
+		profile.setFavoriteMovies(updatedProfile.getFavoriteMovies());
+		profile.setFavoriteTvShows(updatedProfile.getFavoriteTvShows());
 		return profile;
+		}
 	}
 
 	@Override
