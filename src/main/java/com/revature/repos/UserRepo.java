@@ -70,9 +70,10 @@ public class UserRepo implements BasicRepo <User>{
 			user.setFirstName(updatedUser.getFirstName());
 			user.setLastName(updatedUser.getLastName());
 			user.setPassword(updatedUser.getPassword());
+			return user;
 		}
-		session.save(user);
-		return user;
+		
+		
 	}
 
 	@Override
