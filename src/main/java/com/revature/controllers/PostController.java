@@ -41,6 +41,12 @@ public class PostController {
 		return service.getAll();
 	}
 	
+	@RequestMapping(value="/topic={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Post> getByTopicId(@PathVariable int id) {
+		System.out.println(id);
+		return service.getByTopicId(id);
+	}
+	
 	@RequestMapping(value="/user={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getByUserId(@PathVariable int id) {
 		System.out.println(id);

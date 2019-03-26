@@ -28,6 +28,12 @@ public class PostService {
 	public List<Post> getAll(){
 		return repo.getAll();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Post> getByTopicId(int id)
+	{
+		return repo.getByTopicId(id);
+	}
 	@Transactional(readOnly = true)
 		public List<Post> getByUserId(int id)
 		{

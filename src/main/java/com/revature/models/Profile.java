@@ -56,8 +56,9 @@ public class Profile {
 //		user.setId(userId);
 //	}
 	
-	public Profile(String favoriteMovies, String favoriteBooks, String favoriteTvShows) {
+	public Profile(int profileId, String favoriteMovies, String favoriteBooks, String favoriteTvShows) {
 		super();
+		this.profileId = profileId;
 		this.favoriteMovies = favoriteMovies;
 		this.favoriteBooks = favoriteBooks;
 		this.favoriteTvShows = favoriteTvShows;
