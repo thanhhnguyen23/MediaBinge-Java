@@ -57,6 +57,10 @@ public class User {
 	public User() {
 		super();
 	}
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
+	private List<Response> responses;
+	
 	public User(int id, String username, String firstName, String lastName, String password, Profile profile) {
 		super();
 		this.id = id;
@@ -70,6 +74,11 @@ public class User {
 		if(posts == null) posts = new ArrayList<>();
 		posts.add(post);
 		post.setUser(this);
+	}
+	public void addResponse(Response response) {
+		if(responses == null) responses = new ArrayList<>();
+		responses.add(response);
+		response.setUser(this);
 	}
 	public int getId() {
 		return id;
@@ -188,10 +197,8 @@ public class User {
 	}
 
 	
-//
-//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-//	@JsonIgnore
-//	private List<Response> responses;
+
+	
 
 
 	

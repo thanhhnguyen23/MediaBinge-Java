@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.models.Post;
 import com.revature.models.Principal;
 import com.revature.services.PostService;
-
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/post")
 public class PostController {
@@ -40,7 +41,15 @@ public class PostController {
 	public List<Post> getAll(){
 		return service.getAll();
 	}
-	//GET BY USER ID
+
+	
+	@RequestMapping(value="/topic={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Post> getByTopicId(@PathVariable int id) {
+		System.out.println(id);
+		return service.getByTopicId(id);
+	}
+	
+
 	@RequestMapping(value="/user={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getByUserId(@PathVariable int id) {
 		System.out.println(id);

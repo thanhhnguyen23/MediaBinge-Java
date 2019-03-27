@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.revature.models.Post;
 import com.revature.models.Profile;
 import com.revature.models.User;
 @Component
@@ -33,18 +35,26 @@ public class ProfileRepo implements BasicRepo<Profile>{
 		Session session = factory.getCurrentSession();
 		return session.get(Profile.class, id);
 	}
+	
+	public Profile getByUserId(int id)
+	{
+		Session session = factory.getCurrentSession();
+		Query myQuery = session.createQuery("from Profile p where p.user.id = :userId");
+		myQuery.setParameter("userId", id);
+		List<Profile> profiles = myQuery.getResultList();
+		return profiles.get(0);
+	}
+		
 
 	@Override
 	public Profile add(Profile newProfile) {
-//		Session session = factory.getCurrentSession();
+	Session session = factory.getCurrentSession();
 		System.out.println(newProfile);
-//		System.out.println(newProfile.getUserId());
-//		User user = session.get(User.class, newProfile.getUserId());
-//		if(user != null) {
-//			user.setProfile(newProfile);
-//			session.save(newProfile);
-//			return newProfile;
-//		}//TODO throw an exception here
+
+		if(newProfile!= null) {
+			session.save(newProfile);
+			return newProfile;
+		}//TODO throw an exception here
 		return null;
 	}
 
@@ -53,9 +63,14 @@ public class ProfileRepo implements BasicRepo<Profile>{
 
 		Session session = factory.getCurrentSession();
 		Profile profile = session.get(Profile.class, updatedProfile.getProfileId());
-		if(profile == null) return null;
-		else profile = updatedProfile;
+		System.out.println(profile);
+		if(profile == null) { return null;}
+		else { 
+		profile.setFavoriteBooks(updatedProfile.getFavoriteBooks());
+		profile.setFavoriteMovies(updatedProfile.getFavoriteMovies());
+		profile.setFavoriteTvShows(updatedProfile.getFavoriteTvShows());
 		return profile;
+		}
 	}
 
 	@Override
