@@ -37,19 +37,19 @@ public class UserController {
 		return service.getAll();
 	}
 	
-//	@GetMapping(value="/{id)", produces=MediaType.APPLICATION_JSON_VALUE)
+//	GET USER BY ID NEEDS TO BE LIKE THIS TO WORK
 	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public User getUserById(@PathVariable int id) {
 		User user = service.getById(id);
 		return user;
 	}
-	
+	//ADD USER
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/register", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public User addUser(@RequestBody User newUser) {
 		return service.add(newUser);
 	}
-	
+	//UPDATE USER
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces="application/json")
 	public User updateUser(@RequestBody User updateUser) {

@@ -41,17 +41,8 @@ public class User {
 	private String password;
 	
 
-	@Column(name="role_id")
-	private String role_id;
-	
-
-	//TODO -- come back here
-
-
-
-
-//	@Column(name = "role_id")
-//	private int roleId;
+	@Column(name = "role_id")
+	private int roleId;
 	
 
 	//TODO -- come back here
@@ -137,13 +128,13 @@ public class User {
 		this.profile = profile;
 	}
 	
-	public String getRole() {
-		return role_id;
+	public int getRole() {
+		return roleId;
 	}
 
 
-	public void setRole(String role) {
-		this.role_id = role;
+	public void setRole(int role) {
+		this.roleId = role;
 	}
 
 
