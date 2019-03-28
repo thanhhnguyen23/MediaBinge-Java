@@ -68,7 +68,7 @@ public class UserRepo implements BasicRepo <User>{
 		else {
 			user.setUsername(updatedUser.getUsername());
 			user.setFirstName(updatedUser.getFirstName());
-			user.setLastName(updatedUser.getLastName());
+			user.setlastName(updatedUser.getlastName());
 			user.setPassword(updatedUser.getPassword());
 			return user;
 		}

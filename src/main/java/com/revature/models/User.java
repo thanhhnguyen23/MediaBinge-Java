@@ -35,7 +35,7 @@ public class User {
 	private String firstName;
 	
 	@Column(name="last_name")
-	private String LastName;
+	private String lastName;
 	
 	@Column(name="password")
 	private String password;
@@ -60,15 +60,26 @@ public class User {
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	@JsonIgnore
 	private List<Response> responses;
-	
+	public User(int id, String username, String firstName, String lastName, String password)
+	{
+		super();
+		this.id = id;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.role_id = "2";
+		System.out.println("hi");
+	}
 	public User(int id, String username, String firstName, String lastName, String password, Profile profile) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.firstName = firstName;
-		LastName = lastName;
+		this.lastName = lastName;
 		this.password = password;
 		this.profile = profile;
+		System.out.println("maybe");
 	}
 	public void addPost(Post post) {
 		if(posts == null) posts = new ArrayList<>();
@@ -104,12 +115,12 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
-		return LastName;
+	public String getlastName() {
+		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		LastName = lastName;
+	public void setlastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -142,7 +153,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((LastName == null) ? 0 : LastName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -160,10 +171,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (LastName == null) {
-			if (other.LastName != null)
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
-		} else if (!LastName.equals(other.LastName))
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -192,7 +203,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", LastName=" + LastName
+		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", password=" + password + "]";
 	}
 

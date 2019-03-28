@@ -22,7 +22,7 @@ import com.revature.models.Post;
 import com.revature.models.Principal;
 import com.revature.models.Profile;
 import com.revature.services.ProfileService;
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.PATCH,RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/profile")
 public class ProfileController {
@@ -51,20 +51,13 @@ public class ProfileController {
 		Profile profile = service.getById(id);
 		return profile;	
 	}
-	/**
-	 * currently not working
-	 * wants a user object but won't read one when given
-	 * attempted to create a constructor that took in a user id
-	 * json still reads user as null and ignore userId
-	 * @param newProfile
-	 * @return
-	 */
-	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public Profile addProfile(@RequestBody Profile newProfile, @RequestAttribute("principal") Principal principal) {
-		return service.add(newProfile,Integer.parseInt(principal.getId()));
-	}
 	
+//	@ResponseStatus(HttpStatus.CREATED)
+//	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+//	public Profile addProfile(@RequestBody Profile newProfile, @RequestAttribute("principal") Principal principal) {
+//		return service.add(newProfile,Integer.parseInt(principal.getId()));
+//	}
+//	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Profile updateProfile(@RequestBody Profile updatedProfile, @RequestAttribute("principal") Principal principal) {
