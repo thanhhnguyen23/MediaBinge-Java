@@ -24,7 +24,7 @@ public class PostRepo implements BasicRepo<Post>{
 	@Override
 	public List<Post> getAll() {
 		Session session = factory.getCurrentSession();
-		return session.createQuery("from Post order by datePosted desc", Post.class).getResultList();
+		return session.createQuery("from Post", Post.class).getResultList();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class PostRepo implements BasicRepo<Post>{
 	public List<Post> getByTopicId(int id)
 	{
 		Session session = factory.getCurrentSession();
-		Query myQuery = session.createQuery("from Post p where p.topic.id = :topicId order by datePosted desc");
+		Query<Post> myQuery = session.createQuery("from Post p where p.topic.id = :topicId ORDER BY datePosted DESC");
 		myQuery.setParameter("topicId", id);
 		List<Post> posts = myQuery.getResultList();
 		return posts;
