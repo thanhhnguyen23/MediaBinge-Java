@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Profile;
 import com.revature.models.User;
+import com.revature.services.ProfileService;
 import com.revature.services.UserService;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
@@ -25,10 +27,11 @@ import com.revature.services.UserService;
 public class UserController {
 	
 	private UserService service;
-	
+	private ProfileService pService;
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserService userService, ProfileService pService) {
 		this.service = userService;
+		this.pService = pService;
 	}
 	
 	
@@ -47,7 +50,11 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/register", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public User addUser(@RequestBody User newUser) {
-		return service.add(newUser);
+		System.out.println(newUser);
+		newUser.setRole("2");
+		User theUser = service.add(newUser);
+		pService.add(new Profile(),theUser.getId());
+		return theUser;
 	}
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)

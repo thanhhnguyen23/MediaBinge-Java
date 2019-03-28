@@ -40,7 +40,7 @@ private UserService service;
 		System.out.println(JwtConfig.HEADER);
 		resp.addHeader("Info",Integer.toString(user.getId()));
 		resp.addHeader("UserFirstName", user.getFirstName());
-		resp.addHeader("UserLastName", user.getLastName());
+		resp.addHeader("UserLastName", user.getlastName());
 		resp.addHeader("UserName", user.getUsername());
 		return user;
 		
