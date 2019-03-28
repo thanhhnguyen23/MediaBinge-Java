@@ -45,7 +45,6 @@ public class User {
 	private int roleId;
 	
 
-	//TODO -- come back here
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	@JsonIgnore
 	private List<Post> posts;
@@ -68,7 +67,7 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
-		this.role_id = "2";
+		this.roleId = 2;
 		System.out.println("hi");
 	}
 	public User(int id, String username, String firstName, String lastName, String password, Profile profile) {
