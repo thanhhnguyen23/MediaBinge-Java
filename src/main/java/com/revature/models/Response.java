@@ -53,6 +53,11 @@ public class Response {
 	public Response() {
 		super();
 	}
+	public Response(int responseId, String text)
+	{
+		this.responseId = responseId;
+		this.text = text;
+	}
 	public Response(int responseId, String text, Post post, User user, String api_call, Timestamp datePosted) {
 		super();
 		this.responseId = responseId;

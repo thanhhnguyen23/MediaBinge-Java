@@ -60,6 +60,7 @@ public class ResponseController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/{id}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public Response add(@RequestBody Response newResponse, @RequestAttribute("principal") Principal principal, @PathVariable int id) {
+		System.out.println("hi");
 		newResponse.setDatePosted(new Timestamp(System.currentTimeMillis()));
 		return service.add(newResponse,Integer.parseInt(principal.getId()), id);
 	}

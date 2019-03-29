@@ -24,6 +24,12 @@ public class ProfileService {
 		this.uRepo = uRepo;
 	}
 	
+	@Transactional(readOnly = true)
+	public Profile getByUserName(String username)
+	{
+		return this.proRepo.getByUserName(username);
+		
+	}
 	@Transactional(readOnly = true) 
 	public List<Profile> getAll(){
 		return proRepo.getAll();

@@ -49,6 +49,16 @@ public class ProfileController {
 		return service.getByUserId(Integer.parseInt(principal.getId()));
 	}
 
+	
+	@RequestMapping(value = "/user={username}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE )
+	public Profile getByUserName(@PathVariable String username)
+	{
+		return service.getByUserName(username);
+	}
+	
+
+
+
 	@GetMapping(value="/{id}")
 	public Profile getProfileById(@PathVariable int id) {
 		Profile profile = service.getById(id);
