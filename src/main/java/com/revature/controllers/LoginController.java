@@ -18,7 +18,7 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 import com.revature.util.JwtConfig;
 import com.revature.util.JwtGenerator;
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","Role","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -33,13 +33,14 @@ private UserService service;
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces="application/json")
 	public User login(@RequestBody User credentials, HttpServletResponse resp)
 	{
-		System.out.println(resp);
+		System.out.println("Response:"+resp);
 		User user = service.getByCredentials(credentials.getUsername(), credentials.getPassword());
 		resp.setHeader(JwtConfig.HEADER, JwtConfig.PREFIX + JwtGenerator.createJwt(user));
 		System.out.println(resp.getHeader(JwtConfig.HEADER));
 		System.out.println(JwtConfig.HEADER);
 		resp.addHeader("Info",Integer.toString(user.getId()));
 		resp.addHeader("UserFirstName", user.getFirstName());
+		resp.addHeader("Role", Integer.toString(user.getRole()));
 		resp.addHeader("UserLastName", user.getlastName());
 		resp.addHeader("UserName", user.getUsername());
 		return user;
