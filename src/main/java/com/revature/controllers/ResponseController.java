@@ -22,17 +22,20 @@ import com.revature.models.Post;
 import com.revature.models.Principal;
 import com.revature.models.Response;
 import com.revature.services.ResponseService;
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
+@CrossOrigin(origins = "http://s3-jose-example.s3-website-us-east-1.amazonaws.com",
+						allowedHeaders = {"content-type","Authorization"},
+						exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"},
+						methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/response")
 public class ResponseController {
-	
+
 	private ResponseService service;
-	
+
 	public ResponseController(ResponseService responseService) {
 		this.service = responseService;
 	}
-	
+
 	//READ
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Response> getAll(){
@@ -52,7 +55,7 @@ public class ResponseController {
 	public Response getResponseById(@PathVariable int id) {
 		return service.getById(id);
 	}
-	
+
 	//ADD
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/{id}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -61,20 +64,20 @@ public class ResponseController {
 		newResponse.setDatePosted(new Timestamp(System.currentTimeMillis()));
 		return service.add(newResponse,Integer.parseInt(principal.getId()), id);
 	}
-	
+
 	//UPDATE
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public Response updateResponse(@RequestBody Response updatedResponse) {
 		return service.update(updatedResponse);
 	}
-	
+
 	//DELETE
 	@DeleteMapping(value="/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteResponse(@PathVariable int id) {
 		service.delete(id);
 	}
-	
+
 
 }

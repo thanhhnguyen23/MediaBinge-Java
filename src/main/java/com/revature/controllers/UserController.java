@@ -21,14 +21,14 @@ import com.revature.models.Profile;
 import com.revature.models.User;
 import com.revature.services.ProfileService;
 import com.revature.services.UserService;
-@CrossOrigin(origins = "http://localhost:4200", 
+@CrossOrigin(origins = "http://s3-jose-example.s3-website-us-east-1.amazonaws.com",
 			allowedHeaders = {"content-type","Authorization"},
-			exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, 
+			exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"},
 			methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/users")
 public class UserController {
-	
+
 	private UserService service;
 	private ProfileService pService;
 	@Autowired
@@ -36,13 +36,13 @@ public class UserController {
 		this.service = userService;
 		this.pService = pService;
 	}
-	
-	
+
+
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getAll(){
 		return service.getAll();
 	}
-	
+
 //	GET USER BY ID NEEDS TO BE LIKE THIS TO WORK
 	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public User getUserById(@PathVariable int id) {
@@ -66,13 +66,13 @@ public class UserController {
 		User user = service.update(updateUser);
 		return user;
 	}
-	
+
 	//TODO Throws an exception, possibly because user has no posts
 	@DeleteMapping(value="/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteUser(@PathVariable int id) {
 		service.delete(id);
 	}
-	
+
 
 }

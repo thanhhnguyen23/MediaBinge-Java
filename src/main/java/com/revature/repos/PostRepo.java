@@ -45,7 +45,7 @@ public class PostRepo implements BasicRepo<Post>{
 	public List<Post> getByTopicId(int id)
 	{
 		Session session = factory.getCurrentSession();
-		Query myQuery = session.createQuery("from Post p where p.topic.id = :topicId");
+		Query<Post> myQuery = session.createQuery("from Post p where p.topic.id = :topicId ORDER BY datePosted DESC");
 		myQuery.setParameter("topicId", id);
 		List<Post> posts = myQuery.getResultList();
 		return posts;
