@@ -22,7 +22,7 @@ import com.revature.models.Post;
 import com.revature.models.Principal;
 import com.revature.models.Profile;
 import com.revature.services.ProfileService;
-@CrossOrigin(origins = "http://mediabingeeb-env-1.2dmqmp7wnb.us-east-1.elasticbeanstalk.com",
+@CrossOrigin(origins = "http://s3-jose-example.s3-website-us-east-1.amazonaws.com",
 						allowedHeaders = {"content-type","Authorization"},
 						exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"},
 						methods = { RequestMethod.PATCH,RequestMethod.GET, RequestMethod.POST })
