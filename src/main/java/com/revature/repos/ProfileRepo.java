@@ -28,6 +28,15 @@ public class ProfileRepo implements BasicRepo<Profile>{
 		Session session = factory.getCurrentSession();
 		return session.createQuery("from Profile", Profile.class).getResultList();
 	}
+	
+	public Profile getByUserName(String username)
+	{
+		Session session = factory.getCurrentSession();
+		Query myQuery = session.createQuery("from Profile p where p.user.username = :username");
+		myQuery.setParameter("username", username);
+		List<Profile> profiles = myQuery.getResultList();
+		return profiles.get(0);
+	}
 
 	@Override
 	public Profile getById(int id) {

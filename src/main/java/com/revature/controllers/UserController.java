@@ -54,7 +54,7 @@ public class UserController {
 	@PostMapping(value = "/register", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public User addUser(@RequestBody User newUser) {
 		System.out.println(newUser);
-		newUser.setRole("2");
+		newUser.setRole(2);
 		User theUser = service.add(newUser);
 		pService.add(new Profile(),theUser.getId());
 		return theUser;
