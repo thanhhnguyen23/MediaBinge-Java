@@ -18,13 +18,16 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 import com.revature.util.JwtConfig;
 import com.revature.util.JwtGenerator;
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","Role","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
+@CrossOrigin(origins = "http://mediabingeeb-env-1.2dmqmp7wnb.us-east-1.elasticbeanstalk.com",
+						allowedHeaders = {"content-type","Authorization"},
+						exposedHeaders = {"Authorization","Info","Role","UserFirstName","UserLastName","UserName"},
+						methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/login")
 public class LoginController {
 
 private UserService service;
-	
+
 	@Autowired
 	public LoginController(UserService userService) {
 		this.service = userService;
@@ -44,7 +47,7 @@ private UserService service;
 		resp.addHeader("UserLastName", user.getlastName());
 		resp.addHeader("UserName", user.getUsername());
 		return user;
-		
-		
+
+
 	}
 }

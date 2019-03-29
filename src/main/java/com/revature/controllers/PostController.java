@@ -23,42 +23,45 @@ import com.revature.models.Post;
 import com.revature.models.Principal;
 import com.revature.services.PostService;
 
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.GET, RequestMethod.POST })
+@CrossOrigin(origins = "http://mediabingeeb-env-1.2dmqmp7wnb.us-east-1.elasticbeanstalk.com",
+						allowedHeaders = {"content-type","Authorization"},
+						exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"},
+						methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/post")
 public class PostController {
-	
+
 	private PostService service;
-	
+
 	@Autowired
 	public PostController(PostService postService) {
 		this.service = postService;
 	}
-	
+
 	/***
 	 * Get all posts
 	 * @return List of Posts
 	 */
-	
+
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getAll(){
 		return service.getAll();
 	}
 
-	
+
 	@RequestMapping(value="/topic={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getByTopicId(@PathVariable int id) {
 		System.out.println(id);
 		return service.getByTopicId(id);
 	}
-	
+
 
 	@RequestMapping(value="/user={id}", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getByUserId(@PathVariable int id) {
 		System.out.println(id);
 		return service.getByUserId(id);
 	}
-	
+
 	/***
 	 * Get a singular post by it's unique ID
 	 * @param id
@@ -75,19 +78,19 @@ public class PostController {
 		newPost.setDatePosted(new Timestamp(System.currentTimeMillis()));
 		return service.add(newPost, Integer.parseInt(principal.getId()));
 	}
-		
+
 	//UPDATE
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces="application/json")
 	public Post editPost(@RequestBody Post updatedPost) {
 		return service.update(updatedPost);
 	}
-	
+
 	@DeleteMapping(value="/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletePost(@PathVariable int id) {
 		service.delete(id);
 	}
-	
+
 
 }
