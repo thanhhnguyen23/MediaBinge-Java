@@ -22,50 +22,53 @@ import com.revature.models.Post;
 import com.revature.models.Principal;
 import com.revature.models.Profile;
 import com.revature.services.ProfileService;
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"content-type","Authorization"},exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"}, methods = { RequestMethod.PATCH,RequestMethod.GET, RequestMethod.POST })
+@CrossOrigin(origins = "http://mediabingeeb-env-1.2dmqmp7wnb.us-east-1.elasticbeanstalk.com",
+						allowedHeaders = {"content-type","Authorization"},
+						exposedHeaders = {"Authorization","Info","UserFirstName","UserLastName","UserName"},
+						methods = { RequestMethod.PATCH,RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/profile")
 public class ProfileController {
-	
+
 	private ProfileService service;
-	
-	@Autowired 
+
+	@Autowired
 	public ProfileController(ProfileService profileService) {
 		this.service = profileService;
 	}
-	
+
 //	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Profile> getAll(){
 		return service.getAll();
 	}
-	
+
 	@RequestMapping(value="/user", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public Profile getByUserId(@RequestAttribute("principal") Principal principal) {
 		System.out.println(principal);
 		return service.getByUserId(Integer.parseInt(principal.getId()));
 	}
-	
+
 	@GetMapping(value="/{id}")
 	public Profile getProfileById(@PathVariable int id) {
 		Profile profile = service.getById(id);
-		return profile;	
+		return profile;
 	}
-	
+
 //	@ResponseStatus(HttpStatus.CREATED)
 //	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 //	public Profile addProfile(@RequestBody Profile newProfile, @RequestAttribute("principal") Principal principal) {
 //		return service.add(newProfile,Integer.parseInt(principal.getId()));
 //	}
-//	
+//
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PatchMapping(consumes="application/json", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Profile updateProfile(@RequestBody Profile updatedProfile, @RequestAttribute("principal") Principal principal) {
-		
+
 		Profile profile = service.update(updatedProfile, Integer.parseInt(principal.getId()));
 		return profile;
 	}
-	
+
 	@DeleteMapping(value="/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteProfile(@PathVariable int id) {
