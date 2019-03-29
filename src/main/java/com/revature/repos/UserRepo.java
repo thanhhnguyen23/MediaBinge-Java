@@ -1,9 +1,17 @@
 package com.revature.repos;
 
+
 import java.util.List;
+
+
+
+
+
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,14 +30,29 @@ public class UserRepo implements BasicRepo <User>{
 	public List<User> getAll() {
 		Session session = factory.getCurrentSession();
 		return session.createQuery("from User", User.class).getResultList();
+		
 	}
 
 	@Override
 	public User getById(int id) {
 		Session session = factory.getCurrentSession();
-		return session.get(User.class, id);
+		User user = session.get(User.class, id);
+		//Hibernate.initialize(user.getPosts()); //may or may not be necessary
+		return user;
 	}
-
+	public User getByCredentials(String username, String password)
+	{
+		Session session = factory.getCurrentSession();
+		Query myQuery = session.createQuery("from User u where u.username = :username AND u.password = :password");
+		myQuery.setParameter("username", username);
+		myQuery.setParameter("password", password);
+		List<User> myUser = myQuery.getResultList();
+		if(myUser.size() == 0)
+		{
+			return null;
+		}
+		return myUser.get(0);
+	}
 	@Override
 	public User add(User newUser) {
 		Session session = factory.getCurrentSession();
@@ -45,11 +68,13 @@ public class UserRepo implements BasicRepo <User>{
 		else {
 			user.setUsername(updatedUser.getUsername());
 			user.setFirstName(updatedUser.getFirstName());
-			user.setLastName(updatedUser.getLastName());
+			user.setlastName(updatedUser.getlastName());
 			user.setPassword(updatedUser.getPassword());
+			user.setRole(updatedUser.getRole());
+			return user;
 		}
-		session.save(user);
-		return user;
+		
+		
 	}
 
 	@Override
