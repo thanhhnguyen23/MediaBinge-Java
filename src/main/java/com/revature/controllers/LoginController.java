@@ -18,7 +18,7 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 import com.revature.util.JwtConfig;
 import com.revature.util.JwtGenerator;
-@CrossOrigin(origins = "http://mediabingeeb-env-1.2dmqmp7wnb.us-east-1.elasticbeanstalk.com",
+@CrossOrigin(origins = "http://s3-jose-example.s3-website-us-east-1.amazonaws.com",
 						allowedHeaders = {"content-type","Authorization"},
 						exposedHeaders = {"Authorization","Info","Role","UserFirstName","UserLastName","UserName"},
 						methods = { RequestMethod.GET, RequestMethod.POST })
